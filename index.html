@@ -1,0 +1,61 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<link href="css/jquery.mobile-1.4.5.css" rel="stylesheet" />
+<link href="css/jquery.mobile.theme-1.4.5.css" rel="stylesheet" />
+<link href="css/jquery.mobile.structure-1.4.5.css" rel="stylesheet" />
+
+<script type="text/javascript" src="phonegap"></script>
+
+<script src="js/jquery-2.1.4.min.js" type="text/javascript" ></script>
+<script src="js/jquery.mobile-1.4.5.js" type="text/javascript"></script> 
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Documento sin título</title>
+
+<script type="text/javascript">
+opciones={maximumAge:500000,enableHighAccuracy:true,timeout:5000};
+document.addEventlistener("deviceready",function () {
+$("#btnCoordenadas").tap(function() {
+	if(navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(exito,falla,opciones);
+		function exito(posicion){
+			$("#txtLatitud").val(posicion.coords.latitude);
+			$("#txtLongitud").val(posicion.coords.longitude);
+					}
+		function falla (error) {
+			alert ("error al obtener las coordenadas:"+error.code);	
+		}
+			}
+			else{
+			alert("su dispositivono tiene soportede geolocalizacion");
+					}
+});
+},false);
+</script>
+
+<style type="text/css">
+	p{
+		text-align:center;
+	}
+</style>
+</head>
+
+<body>
+<div data-role="page" id="principal" data-theme="b">
+	<div data-role="header">
+    	<p>geolocalizacion</p>
+    </div> 
+    <div data-role="content">
+    	<p>Obtener coodenadas</p>
+		<input type="text" id="txtLatitud" placeholder="Latitud" />
+		<input type="text" id="txtLongitud" placeholder="Longitud" />
+		<input type="text" id="txtCoordenadas" placeholder="obtebner coodenadas" />
+	 
+    </div>
+    <div data-role="footer" data-position="fixed">
+    	<p>Pie de aplicación</p>
+    </div>
+</div>
+
+</body>
+</html>
